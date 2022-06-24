@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -7,9 +9,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-  constructor() { }
+  loginForm = new FormGroup({
+    email: new FormControl('', [Validators.required, Validators.email]),
+    password: new FormControl('')
+  });
+
+  constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
+  }
+
+  ingresar(){
+    this.authService.loginConLaravel(this.loginForm.value).subscribe(
+      (res: any) => {
+        console.log(res)
+      },
+      (error: any) => {
+        console.log(error)
+      }
+    ) 
   }
 
 }
