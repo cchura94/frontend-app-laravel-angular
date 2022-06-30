@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-
+import { PrimeNGConfig } from 'primeng/api';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -7,4 +7,12 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'frontend-app-angular';
+  menuMode = 'static';
+
+    constructor(private primengConfig: PrimeNGConfig) { }
+
+    ngOnInit() {
+        this.primengConfig.ripple = true;
+        document.documentElement.style.fontSize = '14px';
+    }
 }
