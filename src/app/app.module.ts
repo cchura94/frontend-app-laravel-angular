@@ -1,6 +1,7 @@
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { PrimengModule } from './primeng/primeng.module'
 
@@ -48,7 +49,8 @@ import { Not404Component } from './errors/not404/not404.component';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    PrimengModule
+    PrimengModule,
+    BrowserAnimationsModule
   ],
   providers: [
     {

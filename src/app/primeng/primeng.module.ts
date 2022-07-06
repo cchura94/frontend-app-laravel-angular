@@ -84,6 +84,7 @@ import { TreeModule } from 'primeng/tree';
 import { TreeSelectModule } from 'primeng/treeselect';
 import { TreeTableModule } from 'primeng/treetable';
 import { VirtualScrollerModule } from 'primeng/virtualscroller';
+import {ProgressSpinnerModule} from 'primeng/progressspinner';
 
 const modulosPrimeNg = [
   AccordionModule,
@@ -166,6 +167,7 @@ const modulosPrimeNg = [
   TreeSelectModule,
   TreeTableModule,
   VirtualScrollerModule,
+  ProgressSpinnerModule,
 ]
 
 @NgModule({
