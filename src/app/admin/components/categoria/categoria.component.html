@@ -4,7 +4,7 @@
     
 
     <p-button (click)="showModalCategoriaDialog()" icon="pi pi-external-link" label="Nueva Categoria"></p-button>
-    <p-dialog header="Categoria" [(visible)]="displayModalCategoria" [modal]="true" [style]="{width: '30vw'}"
+    <p-dialog header="Categoria" [(visible)]="displayModalCategoria" [modal]="true" [style]="{width: '30vw'}" styleClass="p-fluid"
         [draggable]="false" [resizable]="false">
         
         <div [formGroup]="categoriaForm">
