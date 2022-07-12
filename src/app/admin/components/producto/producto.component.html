@@ -45,11 +45,16 @@
                     <p-tableCheckbox [value]="product"></p-tableCheckbox>
                 </td>
                 <td>{{product.nombre}}</td>
-                <td><img [src]="'assets/showcase/images/demo/product/' + product.image" [alt]="product.name" width="100" class="shadow-4" /></td>
+                <td>
+                    
+                    <img [src]="'http://app-ventas-la.herokuapp.com/' + product.imagen" [alt]="product.name" width="100" class="shadow-4" />
+                </td>
                 <td>{{product.precio | currency:'Bs. '}}</td>
                 <td>{{product.stock }}</td>
                 <td>{{product.categoria.nombre}}</td>
                 <td>
+                    <p-button (click)="showModalDialogImagen(product)" icon="pi pi-external-link" label="imagen"></p-button>
+
                     <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" (click)="editProduct(product)"></button>
                     <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="deleteProduct(product)"></button>
                 </td>
@@ -105,6 +110,13 @@
         <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
         <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="saveProduct()"></button>
     </ng-template>
+</p-dialog>
+
+<p-dialog header="Subir Imagen" [(visible)]="displayModalImagen" [modal]="true" [style]="{width: '50vw'}"
+    [draggable]="false" [resizable]="false">
+
+     <p-fileUpload #uploader (onBeforeUpload)="onBeforeUploadListener($event, uploader)"></p-fileUpload>
+                
 </p-dialog>
 
 <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>

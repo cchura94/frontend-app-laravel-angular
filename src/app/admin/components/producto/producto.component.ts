@@ -20,10 +20,14 @@ interface Product {
 })
 export class ProductoComponent implements OnInit {
 
+  uploadedFiles: any[] = []
+
   totalRecords: number;
    loading: boolean;
+   id_prod_img: number = 0;
 
     productDialog: boolean;
+    displayModalImagen: boolean;
 
     products: Product[];
 
@@ -56,7 +60,8 @@ export class ProductoComponent implements OnInit {
   loadProductos(event: LazyLoadEvent) {
         this.loading = true;
         console.log(event)
-        this.listarProducto(event.first)
+        let page = (event.first/event.rows)+1
+        this.listarProducto(page)
         /*setTimeout(() => {
             this.customerService.getCustomers({lazyEvent: JSON.stringify(event)}).then(res => {
                 this.customers = res.customers;
@@ -66,7 +71,7 @@ export class ProductoComponent implements OnInit {
         }, 1000);*/
     }
 
-  listarProducto(page=10){
+  listarProducto(page=1){
     this.loading = true;
     this.productoService.indexProducto(page).subscribe(
       (res: any) => {
@@ -104,8 +109,16 @@ saveProduct() {
 
   if (this.product.nombre.trim()) {
       if (this.product.id) {
+        this.productoService.updateProducto(this.product, this.product.id).subscribe(
+          (res:any) => {
+            this.messageService.add({severity:'success', summary: 'Successful', detail: 'Product Modificado', life: 3000});
+
+          },
+          (error: any) => {
+            alert("error")
+          }
+        )
           //this.products[this.findIndexById(this.product.id)] = this.product;
-          //this.messageService.add({severity:'success', summary: 'Successful', detail: 'Product Updated', life: 3000});
       }
       else {
         this.productoService.storeProducto(this.product).subscribe(
@@ -126,5 +139,50 @@ saveProduct() {
       this.product = {nombre: '', precio: 0, stock: 0, descripcion: '', categoria_id:0};
   }
 }
+
+  editProduct(product: Product) {
+        this.product = {...product};
+        this.productDialog = true;
+    }
+
+    deleteProduct(product: Product) {
+        this.confirmationService.confirm({
+            message: 'Está seguro de eliminar el producto ' + product.nombre + '?',
+            header: 'Confirmar',
+            icon: 'pi pi-exclamation-triangle',
+            accept: () => {
+              this.productoService.destroyProducto(product.id).subscribe(
+                (res:any) => {
+                  this.product = {nombre: '', precio: 0, stock: 0, descripcion: '', categoria_id:0};
+                  this.messageService.add({severity:'success', summary: 'Successful', detail: 'Product Eliminado', life: 3000});
+                  this.listarProducto()
+                }
+              )
+                // this.products = this.products.filter(val => val.id !== product.id);
+            }
+        });
+    }
+
+    showModalDialogImagen(producto: Product){
+      this.id_prod_img = producto.id
+      this.displayModalImagen = true
+    }
+
+    onBeforeUploadListener(event, uploader:any){
+      console.log(uploader.files)
+      this.uploadedFiles =uploader.files
+
+      let formdata = new FormData;
+      formdata.append("imagen", this.uploadedFiles[0]);
+
+      this.productoService.subirImagen(formdata, this.id_prod_img).subscribe(
+        (res: any) => {
+          console.log(res)
+          this.displayModalImagen = false
+          this.listarProducto()
+        }
+      )
+
+    }
 
 }

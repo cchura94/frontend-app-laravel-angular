@@ -9,7 +9,7 @@ export class ProductoService {
   urlBase = environment.servidor
   constructor(private http: HttpClient) { }
 
-  indexProducto(page=10){
+  indexProducto(page=1){
     return this.http.get(`${this.urlBase}/producto?page=${page}`);
   }
 
@@ -27,6 +27,10 @@ export class ProductoService {
 
   destroyProducto(id){
     return this.http.delete(`${this.urlBase}/producto/${id}`);
+  }
+
+  subirImagen(fd, id){
+    return this.http.post(`${this.urlBase}/producto/${id}/actualizar-imagen`, fd);
   }
 
 }
