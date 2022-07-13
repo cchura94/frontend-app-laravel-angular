@@ -1,0 +1,75 @@
+<div class="card">
+    <h5>Lista de pedido</h5>
+
+    <p-table #dt [value]="pedidos" [lazy]="true" [rows]="2" (onLazyLoad)="loadPedidos($event)"
+                [paginator]="true" [globalFilterFields]="['name','country.name','representative.name','status']"
+                responsiveLayout="scroll" [(selection)]="selectedPedidos" [rowHover]="true" dataKey="id"
+                [totalRecords]="totalRecords" [loading]="loading"
+                currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} pedidos"
+                [showCurrentPageReport]="true">
+                <ng-template pTemplate="caption">
+                    <div class="flex align-items-center justify-content-between">
+                        <h5 class="m-0">Lista Pedidos</h5>
+                        <span class="p-input-icon-left">
+                            <i class="pi pi-search"></i>
+                            <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
+                                placeholder="Search..." />
+                        </span>
+                    </div>
+                </ng-template>
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th pSortableColumn="nombre">Fecha Pedido <p-sortIcon field="fecha_pedido"></p-sortIcon>
+                        </th>
+                        <th pSortableColumn="precio">Cliente <p-sortIcon field="precio"></p-sortIcon>
+                        </th>
+                        <th></th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-pedidos>
+                    <tr>
+                        <td>{{pedidos.fecha_pedido}}</td>
+                        <td>{{pedidos.cliente.nombre_completo}} - {{pedidos.cliente.ci_nit}}</td>
+                        <td>
+<p-button (click)="showModalDialog(pedidos)" icon="pi pi-external-link" label="Mostrar Productos"></p-button>
+
+
+                        </td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="summary">
+                    <div class="flex align-items-center justify-content-between">
+                        En Total son {{pedidos ? pedidos.length : 0 }} pedidos.
+                    </div>
+                </ng-template>
+            </p-table>
+
+</div>
+
+<p-dialog header="Header" [(visible)]="displayModal" [modal]="true" [style]="{width: '50vw'}"
+    [draggable]="false" [resizable]="false">
+    
+    <p-table *ngIf="pedido" [value]="pedido.productos" responsiveLayout="scroll">
+        <ng-template pTemplate="header">
+            <tr>
+                <th>ID</th>
+                <th>NOMBRE</th>
+                <th>CANTIDAD</th>
+                <th>PRECIO</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-product>
+            <tr>
+                <td>{{product.id}}</td>
+                <td>{{product.nombre}}</td>
+                <td>{{product.pivot.cantidad}}</td>
+                <td>{{product.precio}}</td>
+            </tr>
+        </ng-template>
+    </p-table>
+    
+
+    <ng-template pTemplate="footer">
+        <p-button icon="pi pi-check" (click)="displayModal=false" label="Ok" styleClass="p-button-text"></p-button>
+        </ng-template>
+</p-dialog>

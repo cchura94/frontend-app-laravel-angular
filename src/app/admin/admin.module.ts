@@ -8,13 +8,21 @@ import { CategoriaComponent } from './components/categoria/categoria.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { PrimengModule } from '../primeng/primeng.module';
 import { ProductoComponent } from './components/producto/producto.component';
+import { ListaPedidoComponent } from './components/pedido/lista-pedido/lista-pedido.component';
+import { NuevoPedidoComponent } from './components/pedido/nuevo-pedido/nuevo-pedido.component';
+import { MostrarPedidoComponent } from './components/pedido/mostrar-pedido/mostrar-pedido.component';
+import { IndexPedidoComponent } from './components/pedido/index-pedido/index-pedido.component';
 
 
 @NgModule({
   declarations: [
     PerfilComponent,
     CategoriaComponent,
-    ProductoComponent
+    ProductoComponent,
+    ListaPedidoComponent,
+    NuevoPedidoComponent,
+    MostrarPedidoComponent,
+    IndexPedidoComponent
   ],
   imports: [
     CommonModule,

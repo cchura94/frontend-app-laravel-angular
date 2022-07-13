@@ -3,6 +3,10 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppMainComponent } from '../app.main.component';
 import { AuthGuard } from '../guards/auth.guard';
 import { CategoriaComponent } from './components/categoria/categoria.component';
+import { IndexPedidoComponent } from './components/pedido/index-pedido/index-pedido.component';
+import { ListaPedidoComponent } from './components/pedido/lista-pedido/lista-pedido.component';
+import { MostrarPedidoComponent } from './components/pedido/mostrar-pedido/mostrar-pedido.component';
+import { NuevoPedidoComponent } from './components/pedido/nuevo-pedido/nuevo-pedido.component';
 import { PerfilComponent } from './components/perfil/perfil.component';
 import { ProductoComponent } from './components/producto/producto.component';
 
@@ -25,6 +29,25 @@ const routes: Routes = [
         path: "producto",
         component: ProductoComponent,
         canActivate: [AuthGuard]
+      },
+      {
+        path: "pedido",
+        component: IndexPedidoComponent,
+        children: [
+          {
+            path: "",
+            component: ListaPedidoComponent
+          },
+          {
+            path: "nuevo",
+            component: NuevoPedidoComponent
+          },
+          {
+            path: ":id",
+            component: MostrarPedidoComponent
+          }
+
+        ]
       }
     ]
   }
