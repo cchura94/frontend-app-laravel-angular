@@ -8,11 +8,13 @@ import { RegistroComponent } from './components/registro/registro.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CoreModule } from './../core/core.module'
 import { PrimengModule } from '../primeng/primeng.module';
+import { ResetComponent } from './components/reset/reset.component';
 
 @NgModule({
   declarations: [
     LoginComponent,
-    RegistroComponent
+    RegistroComponent,
+    ResetComponent
   ],
   imports: [
     CommonModule,

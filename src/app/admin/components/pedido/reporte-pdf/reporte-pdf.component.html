@@ -1,0 +1,10 @@
+<div class="card">
+    <button type="button" (click)="generarReporte()">PDF</button>
+
+
+    <pdf-viewer [src]="pdfSrc"
+              [render-text]="true"
+              [original-size]="false"
+              style="width: 900px; height: 1000px"
+  ></pdf-viewer>
+</div>

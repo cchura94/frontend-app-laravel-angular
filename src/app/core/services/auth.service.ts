@@ -18,4 +18,8 @@ export class AuthService {
     return this.http.get(`${this.urlBase}/v1/auth/perfil`)
   }
 
+  resetPass(datos: any) {
+    return this.http.post(`${this.urlBase}/reset-password`, datos);
+  }
+
 }

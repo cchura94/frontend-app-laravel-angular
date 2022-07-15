@@ -30,4 +30,8 @@ export class PedidoService {
     return this.http.delete(`${this.urlBase}/pedido/${id}`);
   }
 
+  reportePDF(){
+    return this.http.get<Blob>(`${this.urlBase}/pdf`);
+  }
+
 }

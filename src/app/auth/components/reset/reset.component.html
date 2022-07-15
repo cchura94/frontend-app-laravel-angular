@@ -1,0 +1,18 @@
+<h1>Resetear Contraseña</h1>
+
+<label for="name">TOKEN</label>
+<input type="text" pInputText id="name" [(ngModel)]="reset.token" required autofocus />
+            
+
+<label for="name">EMAIL</label>
+<input type="text" pInputText id="name" [(ngModel)]="reset.email" required autofocus />
+            
+
+<label for="name">Nueva Contraseña</label>
+<input type="text" pInputText id="name" [(ngModel)]="reset.password" required autofocus />
+            
+
+<label for="name">Confirmar Contraseña</label>
+<input type="text" pInputText id="name" [(ngModel)]="reset.password_confirmation" required autofocus />
+            
+<button (click)="resetP()">CAMBIAR CONTRASEÑA</button>
